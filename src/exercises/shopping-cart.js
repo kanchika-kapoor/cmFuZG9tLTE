@@ -15,10 +15,50 @@
 *
 * */
 const View = {
-  init: () => {
+  getJson: async(url)=>{
+    // utility for GET request
+    const response = await fetch(url);
+    const jsonData = await response.json();
+    return jsonData;
+  },
+  getProducts: async() => {
+    // get all data and filter to get cart products data
+    let allProducts = await View.getJson('http://localhost:4002/products/');
+    let cartProducts = await View.getJson('http://localhost:4002/cart/');
+
+    let cartProductsData = cartProducts.map((cartProd)=>{
+      return allProducts.filter(
+        (product)=>{
+          return product.id == cartProd.id;
+        })[0];
+      });
+    return cartProductsData;
+  },
+  makeTableCell: (text)=>{
+    // utility to create td element
+    const td = document.createElement('td');
+    td.innerHTML = text;
+    return td;
+  },
+  init: async() => {
     const tbodyElem = document.getElementById('shopping-cart-tbl').querySelector('tbody');
 
-    console.log('TODO: Please see the above requirement');
+    // get data and append html in table
+    const cartData = await View.getProducts();
+
+    cartData.forEach(element => {
+      const trElem = document.createElement('tr');
+
+      const prodId = View.makeTableCell(element.id);
+      const prodName = View.makeTableCell(element.name);
+
+      trElem.appendChild(prodId);
+      trElem.appendChild(prodName);
+
+      tbodyElem.appendChild(trElem);
+    });
+
+    // console.log('TODO: Please see the above requirement');
   }
 };
 document.addEventListener('DOMContentLoaded', View.init);
