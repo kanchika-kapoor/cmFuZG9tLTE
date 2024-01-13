@@ -1,0 +1,10 @@
+.c-numeric-input--error{
+    border: 3px solid red;
+}
+.c-numeric-input--valid{
+    border: 3px solid green;
+}
+
+.c-numeric-input__error-msg{
+    padding-left: 3px ;
+}
