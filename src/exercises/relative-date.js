@@ -14,7 +14,34 @@
 * */
 
 const calculateRelativeDate = (inputDate) => {
-  return `TODO: Please see the above requirement`;
+  let today = new Date();
+  let givenDate = new Date(inputDate);
+
+  let sameMonth =  givenDate.getMonth() == today.getMonth();
+  let sameYear = givenDate.getFullYear() == today.getFullYear();
+
+
+  switch (true) {
+    case givenDate.toDateString() == today.toDateString():
+      return 'Today';
+    case sameYear && sameMonth && givenDate.getDate() == today.getDate() - 1:
+      return 'Yesterday';
+    case sameYear && sameMonth && givenDate.getDate() > today.getDate() - 7 && givenDate.getDate() < today.getDate() - 1:
+      return 'This week';
+    case sameYear && sameMonth && givenDate.getDate() == today.getDate() - 7:
+      return 'Last week';
+    case sameYear && sameMonth && givenDate.getDate() < today.getDate() - 7:
+      return 'This month';
+    case sameYear && givenDate.getMonth() == today.getMonth() - 1:
+      return 'Last month';
+    case sameYear:
+      return 'This year';
+    case givenDate.getFullYear() == today.getFullYear() - 1:
+      return 'Last year';
+    default:
+      return 'Long time ago';
+  }
+
 };
 
 const View = {
