@@ -28,7 +28,7 @@ const NumericInput = {
   },
   validateInput: (e)=>{
     // regex check for negative, decimal numbers
-    const isValidNumber = /^-?\d*\.?\d*$/.test(e.value);
+    const isValidNumber = /^-?\d*\.?\d*[0-9]$/.test(e.value);
     return isValidNumber;
   },
   resetInput: (e)=>{

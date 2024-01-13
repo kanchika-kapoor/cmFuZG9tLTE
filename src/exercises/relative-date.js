@@ -38,8 +38,10 @@ const calculateRelativeDate = (inputDate) => {
       return 'This year';
     case givenDate.getFullYear() == today.getFullYear() - 1:
       return 'Last year';
+    case givenDate.getFullYear() < today.getFullYear() - 1:
+        return 'Long time ago';
     default:
-      return 'Long time ago';
+      return 'Invalid Date';
   }
 
 };

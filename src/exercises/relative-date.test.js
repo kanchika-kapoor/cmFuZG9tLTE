@@ -66,4 +66,11 @@ describe('Calculate Relative Date', () => {
     const actual = calculateRelativeDate(input);
     expect(actual).to.equal(expected);
   })
+  it('Invalid Date', () => {
+    const date = new Date();
+    const input  = date.setFullYear(date.getFullYear() + 2);
+    const expected = 'Invalid Date';
+    const actual = calculateRelativeDate(input);
+    expect(actual).to.equal(expected);
+  })
 });
